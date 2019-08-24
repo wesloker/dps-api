@@ -1,0 +1,44 @@
+{
+  "name": "dps-api",
+  "version": "0.1.0",
+  "description": "Disaster Prevention System - API (DPS-API)",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon -r dotenv/config index.js",
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wesloker/dps-api.git"
+  },
+  "author": "Andre QS <wesloker.aqs@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wesloker/dps-api/issues"
+  },
+  "homepage": "https://github.com/wesloker/dps-api#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-graphql": "^0.8.0",
+    "graphql": "^14.4.2",
+    "helmet": "^3.18.0",
+    "node-fetch": "^2.6.0",
+    "pdf.js-extract": "^0.1.1",
+    "pg": "^7.11.0",
+    "pg-hstore": "^2.3.3",
+    "puppeteer": "^1.17.0",
+    "sequelize": "^5.9.3"
+  },
+  "devDependencies": {
+    "dotenv": "^8.0.0",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^5.0.0",
+    "eslint-plugin-import": "^2.17.3",
+    "eslint-plugin-prettier": "^3.1.0",
+    "nodemon": "^1.19.1",
+    "prettier": "^1.18.2"
+  }
+}

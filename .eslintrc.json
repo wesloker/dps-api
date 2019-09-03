@@ -18,6 +18,7 @@
     "func-names": "off",
     "consistent-return": "off",
     "radix": "off",
-    "callback-return": "off"
+    "callback-return": "off",
+    "array-callback-return": "off"
   }
 }

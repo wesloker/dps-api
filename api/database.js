@@ -5,7 +5,7 @@ const buildSchemas = require('./models/schemas/');
 const makeRelations = require('./models/associations/');
 
 module.exports = async ({ DATABASE_URL }, NODE_ENV) => {
-  pg.defaults.ssl = !(NODE_ENV === 'development');
+  pg.defaults.ssl = NODE_ENV === 'production';
   const sequelize = await new Sequelize(DATABASE_URL, {
     pool: {
       max: 5,

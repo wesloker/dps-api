@@ -10,7 +10,10 @@ const init = new Promise(async (resolve, reject) => {
       .then(() => {
         process.stdout.write('Connection has been established successfully\n');
         module.exports = client;
-        resolve(client);
+        resolve();
+      })
+      .then(() => {
+        runExpressServer(APP, NODE_ENV, client);
       })
       .catch((err) => {
         process.stdout.write('Unable to connect to the database: \n');
@@ -21,10 +24,4 @@ const init = new Promise(async (resolve, reject) => {
   }
 });
 
-init
-  .then((client) => {
-    runExpressServer(APP, NODE_ENV, client);
-  })
-  .catch((err) => {
-    throw new Error(err);
-  });
+if (NODE_ENV === 'development') module.exports = init;

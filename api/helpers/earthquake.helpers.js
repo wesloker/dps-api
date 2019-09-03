@@ -11,10 +11,10 @@ module.exports = {
   /**
    * @param {number | string} id - Earthquake report identifier.
    */
-  async scrapIGPWebPage(id = 'all') {
+  async scrapIGPWebPage(id) {
     try {
-      if (id === 'undefined' || id === null) {
-        throw new Error('Unexpected value. ID must be a string or number but got: ', id);
+      if (typeof id === 'undefined' || id === null) {
+        throw new Error(`Unexpected value. ID must be a string or number but got: ${id}`);
       } else if (typeof id === 'string' && id === 'all') {
         const browser = await puppeteer.launch();
         const page = await browser.newPage();
@@ -23,9 +23,10 @@ module.exports = {
         return data;
       } else if (parseInt(id) <= 0) {
         throw new Error(
-          'Unexpected value. ID must be a string or number greater than 0 but got: ',
-          id,
+          `Unexpected value. ID must be a string or number greater than 0 but got: ${id}`,
         );
+      } else {
+        throw new Error(`Unexpected value. ID value must be 'last' or 'all' but got: ${id}`);
       }
     } catch (err) {
       throw new Error(err);
@@ -34,10 +35,17 @@ module.exports = {
   /**
    * @param {number | string} id - Earthquake report identifier.
    */
-  async fetchIGPAPI(id = 'last') {
+  async fetchIGPAPI(id) {
     try {
-      if (id === 'undefined' || id === null) {
-        throw new Error('Unexpected value. ID must be a string or number but got: ', id);
+      if (
+        typeof id === 'undefined' ||
+        typeof id === 'function' ||
+        typeof id === 'object' ||
+        typeof id === 'boolean' ||
+        id === null ||
+        Array.isArray(id)
+      ) {
+        throw new Error(`Unexpected value. ID must be a string or number but got: ${id}`);
       } else if (typeof id === 'string' && id === 'last') {
         const data = await fetch(IGPEndpoint);
         const IGPReport = await data.json();
@@ -149,13 +157,12 @@ module.exports = {
         process.stdout.write('Terminated process\n');
         return allReports;
       } else if (parseInt(id) <= 0) {
-        throw new Error(
-          'Unexpected value. ID must be a string or number greater than 0 but got: ',
-          input.id,
-        );
+        throw new Error(`Unexpected value. ID must be a number greater than 0 but got: ${id}`);
+      } else {
+        throw new Error(`Unexpected value. ID value must be 'last' or 'all' but got: ${id}`);
       }
     } catch (err) {
-      throw new Error(err);
+      throw err;
     }
   },
 };
